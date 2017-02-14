@@ -1,0 +1,130 @@
+---
+title: 'Default site title'
+description: 'Default description'
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Basic Page Needs
+================================================== -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <base href="{{site.url}}/{{ site.github.url }}" />
+
+<!-- Mobile Specific Metas
+================================================== -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Title and meta description
+================================================== -->
+  <title>{{site.orgname}} {% if page.url != '/index.html' %}| {{page.title}}{% endif %}</title>
+  <meta property="og:title" content="{{site.orgname}} {% if page.url != '/index.html' %}| {{page.title}}{% endif %}" />
+
+  <meta name="description" content="{{page.description}}">
+  <meta property="og:description" content="{{page.description}}" />
+
+  <link rel="canonical" href="{{page.url}}" />
+
+<!-- Favicons
+================================================== -->
+  <!-- 128x128 -->
+  <link rel="shortcut icon" type="image/ico" href="/img/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="/img/favicons/favicon.png" />
+
+  <!-- 192x192, as recommended for Android
+  http://updates.html5rocks.com/2014/11/Support-for-theme-color-in-Chrome-39-for-Android
+  -->
+  <link rel="icon" type="image/png" sizes="192x192" href="/img/favicons/favicon-192.png" />
+
+  <!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+  <link rel="apple-touch-icon-precomposed" href="/img/favicons/favicon-57.png">
+  <!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/img/favicons/favicon-72.png">
+  <!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/img/favicons/favicon-114.png">
+  <!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/favicons/favicon-144.png">
+
+<!-- CSS
+================================================== -->
+  <link href='/assets/css/site.css' rel='stylesheet' />
+{% if page.url == '/' %}
+  <link href='/assets/css/clickmap.css' rel='stylesheet' />
+{% endif %}
+<!-- Javascript
+================================================== -->
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script async defer>
+    if (!window.jQuery) document.write('<script src="/assets/js/jquery-3.1.1.min.js"><\/script>');
+    $.getScript("https://unpkg.com/react@15/dist/react.min.js")
+      .fail(function( jqxhr, settings, exception ) {
+        document.write('<script src="/assets/js/react.min.js"><\/script>');
+      });
+    $.getScript("https://unpkg.com/react-dom@15/dist/react-dom.min.js")
+      .fail(function( jqxhr, settings, exception ) {
+        document.write('<script src="/assets/js/react-dom.min.js"><\/script>');
+      });
+{% if page.url == '/' %} {% comment %} Only for the index page {% endcomment %}
+    $.getScript("http://d3js.org/topojson.v1.min.js")
+      .fail(function( jqxhr, settings, exception ) {
+        document.write('<script src="/assets/js/topojson.v1.min.js"><\/script>');
+      });
+    $.getScript("http://d3js.org/d3.v3.min.js")
+      .fail(function( jqxhr, settings, exception ) {
+        document.write('<script src="/assets/js/d3.v3.min.js"><\/script>');
+      });
+{% endif %}
+  </script>
+  <script src="/assets/js/site.js"></script>
+</head>
+<body>
+  {% comment %} skipnav for screen readers {% endcomment %}
+  <a class="skipnav" href="#main-content">Skip to main content</a>
+ <header>
+    <div class="site-logo" id="logo">
+      <span class="logo-text">
+        <a href="/" accesskey="1" title="Home" aria-label="Home">{{site.orgname}}</a>
+      </span>
+    </div>
+    <nav role="navigation">
+        <ul>
+          <li>
+            <a class="{% if page.url == "/about/" %}current{% endif %}"
+               href="/about/">
+              <span>About</span>
+            </a>
+          </li>
+          <li>
+            <button onclick="alert('You are now logged in.\n(This is a mockup.)');">
+               Login or Sign up
+            </button>
+          </li>
+        </ul>
+    </nav>
+  </header>
+
+
+  <main id="main-content">
+    {{content}}
+  </main>
+
+
+ <footer class="horizontal-flex" role="contentinfo">
+   <div class="one-third-width">
+     {% if page.url != '/' %}<a href="{{page.url}}">Return to top</a>{% endif %}
+   </div>
+    <div class="one-third-width">
+      <h3>
+        <img class="inline-img" src="/img/bundle-bee.svg" alt="mascot-image">
+        {{site.orgname}}
+      </h3>
+    </div>
+    <div class="one-third-width">
+      <address>
+        <a href="mailto:email-address@bundle-kind.org">email-address@bundle-kind.org</a>
+      </address>
+    </div>
+  </footer>
+</body>

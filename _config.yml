@@ -1,0 +1,24 @@
+baseurl: '/'
+orgname: 'Bundle-Kind (mock)'
+collections:
+  non_profits:
+    state: ''
+    city: ''
+    output: true
+    permalink: /:path
+  cities:
+    state: ''
+    city: ''
+    output: true
+    permalink: /:path
+defaults:
+  - scope:
+      path: ''
+      type: non_profits
+    values:
+      layout: non_profit
+  - scope:
+      path: ''
+      type: cities
+    values:
+      layout: cities

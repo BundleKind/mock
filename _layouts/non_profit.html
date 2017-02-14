@@ -1,0 +1,51 @@
+---
+layout: default
+section: non_profit
+---
+
+{% assign words = page.name | downcase | split: ' ' %}
+{% capture nfp_name %}
+  {% for word in words %}
+    {% if 'and but by for of the to' contains word %}{{ word }}{% else %}{{ word | capitalize }}{% endif %}
+  {% endfor %}
+{% endcapture %}
+<h1>{{ nfp_name }}</h1>
+{% if page.dba %}(Doing business as: {{ page.dba }}){% endif %}
+
+<section class="horizontal-flex">
+  <div class="two-thirds-width" id="map" style="height:20rem"></div>
+  <div class="one-third-width" style="padding: 2rem 3rem">
+    {% if page.homepage %}<a href="http://{{ page.homepage }}">{{ page.homepage }}</a><br/>{% endif %}
+    {{ page.address | replace: '\n', '<br/>' }} <br/>
+    EIN: {{ page.ein }}
+    <p>{{ page.description }}</p>
+    {% capture tag_list %}{{ page.tags | array_to_sentence_string }}{% endcapture %}
+    {% if tag_list != '' %}
+    Tags: {{ tag_list }}
+    {% endif %}
+  </div>
+</section>
+
+
+{{content}}
+
+
+
+<script>
+function initMap() {
+  var map, map_center;
+  map_center = {lat: {{ page.lat }}, lng: {{ page.lng }} };
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 14,
+    center: map_center
+  });
+
+  var marker = new google.maps.Marker({
+    position: map_center,
+    map: map
+  });
+};
+</script>
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key={{ site.data.google_apikeys.mapskey }}&callback=initMap">
+</script>

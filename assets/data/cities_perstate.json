@@ -1,0 +1,64 @@
+---
+---
+{% comment %} ----------------- Setup: get the unique_tags ------------------------ {% endcomment %}
+{% capture all_tags %}{% for nfp in site.non_profits %}{{ nfp.tags | join: ',' }},{% endfor %}{% endcapture %}
+{% assign unique_tags = all_tags | split: "," | uniq %}
+
+{% comment %} ----------------- Output : A JSON object ----------------------------
+
+  Output will look like this:
+      {
+       <state>: {
+          count: <count>, tags: [{tag:<tag>, count:<count>}, ... ],
+          cities: [{city: <city>, count: <count>:, tags: [{tag:<tag>, count:<count>}, ... ]],
+          ...
+        }, ...
+      }
+{% endcomment %}
+
+{% capture all_the_things %}
+{
+{% assign grouped_nfps = site.non_profits | group_by: "state" %}
+{% for state_hash in  grouped_nfps %}
+ "{{ state_hash.name }}": {
+    "count": {{ state_hash.items | size }},
+{% comment %}
+    "tags": [
+{% capture all_tags %}{% for nfp in state_hash.items %}{{ nfp.tags | join: ',' }},{% endfor %}{% endcapture %}
+{% assign unique_tags = all_tags | strip | split: "," | uniq %}
+{% for tag in unique_tags %}{% assign n_occurrences = all_tags | split: tag | size | minus: 1 %}
+        { "tag": "{{ tag }}", "count": "{{n_occurrences}}" }{% if forloop.last == false %},{% endif %}
+{% endfor %}
+    ],
+{% endcomment %}
+    "cities": [
+{% assign subgrouped_nfps = state_hash.items | group_by: "city" %}
+{% for city_hash in subgrouped_nfps %}
+      {
+        "city": "{{ city_hash.name }}",
+        "count": {{ city_hash.items | size }},
+        "tags" : [
+{% capture all_tags %}{% for nfp in city_hash.items %}{{ nfp.tags | join: ',' }},{% endfor %}{% endcapture %}
+{% assign unique_tags = all_tags | split: "," | uniq %}
+{% for tag in unique_tags %}{% assign n_occurrences = all_tags | split: tag | size | minus: 1 %}
+            {"tag": "{{ tag }}", "count": {{n_occurrences}} }{% if forloop.last == false %},{% endif %}
+{% endfor %}
+        ]
+      }{% if forloop.last == false %},{% endif %}
+{% endfor %}
+    ]
+ }{% if forloop.last == false %},{% endif %}
+{% endfor %}
+}
+{% endcapture %}
+
+{% comment %} ----- Try to make the output a little less unreadable (by adding newlines)  ----- {% endcomment %}
+{% capture lbrace_newline %}{
+{% endcapture %}
+{% capture rbrace_newline %}}
+{% endcapture %}
+{% capture comma_newline %},
+{% endcapture %}
+
+{% comment %} -------------------------- Actual output here! --------------------------- {% endcomment %}
+{{ all_the_things | strip_newlines | split: "{ " | join: lbrace_newline | split: ", " | join: comma_newline }}

@@ -1,0 +1,5 @@
+Gemfile.lock
+.jekyll-metadata
+_site/
+_data/google_apikeys.json
+.sass-cache/

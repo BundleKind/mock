@@ -1,0 +1,103 @@
+#clickmap {
+  font: 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  display: flex;
+  height: 30rem; 
+  width: 88rem;
+  margin: auto;
+}
+
+#clickmap div {
+  display: inline;
+  margin: 10px;
+}
+
+#lookup li {
+  color: #888;
+  display: inline-block;
+  font-size: 0.9rem;
+  padding: 0.1rem;
+  margin: 3px;
+  width: 18px;
+}
+
+#lookup li:hover {
+  color: #242;
+  background: #dfd;
+}
+
+#lookup text {
+  text-anchor: middle;
+  font-size: 8px;
+}
+
+#lookup ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/*
+#clickmap li {
+  padding: 0.1rem;
+}
+*/
+
+.click {
+  stroke: #dfd;
+  fill: #cfe;
+  stroke-width: 3px;
+}
+
+.state {
+  fill: #bfd;
+  stroke: #242;
+}
+
+.label {
+  opacity: 0;
+}
+
+li.falsehover {
+  color: #242;
+  background: #dfd;
+}
+
+li.highlight {
+  background: #bff;
+}
+
+.state.highlight {
+  stroke: #242;
+  fill: #bff;  
+}
+.state.falsehover {
+  fill: #dfd;
+}
+.state.falsehover .label {
+  opacity: 1;
+}
+
+.state:hover {
+  fill: #dfd;
+}
+.state:hover .label {
+  opacity: 1;
+}
+
+#map {
+  //border: 1px solid #888;
+  width: 38rem;
+  height: 25rem;
+}
+
+#lookup {
+  width: 6rem;
+  height: 25rem;
+  padding: 0;
+}
+
+#information {
+  width: 20rem;
+  height: 25rem;
+  padding: .5rem 1rem;
+}
+
