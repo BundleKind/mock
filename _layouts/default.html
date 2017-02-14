@@ -9,7 +9,7 @@ description: 'Default description'
 ================================================== -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <base href="{{site.url}}/{{ site.github.url }}" />
+  <base href="{{ site.github.url }}" />
 
 <!-- Mobile Specific Metas
 ================================================== -->
@@ -67,11 +67,11 @@ description: 'Default description'
         document.write('<script src="/assets/js/react-dom.min.js"><\/script>');
       });
 {% if page.url == '/' %} {% comment %} Only for the index page {% endcomment %}
-    $.getScript("http://d3js.org/topojson.v1.min.js")
+    $.getScript("https://d3js.org/topojson.v1.min.js")
       .fail(function( jqxhr, settings, exception ) {
         document.write('<script src="/assets/js/topojson.v1.min.js"><\/script>');
       });
-    $.getScript("http://d3js.org/d3.v3.min.js")
+    $.getScript("https://d3js.org/d3.v3.min.js")
       .fail(function( jqxhr, settings, exception ) {
         document.write('<script src="/assets/js/d3.v3.min.js"><\/script>');
       });
