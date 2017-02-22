@@ -1,0 +1,25 @@
+---
+---
+{% capture all_the_things %}
+{% comment %} ----------------- Setup: get this city's nfps ------------------------ {% endcomment %}
+{% assign nfps = site.non_profits | where: "state", "WA" | where: "city", "Seattle" %}
+
+{% comment %} ----------------- Output : A JSON object ----------------------------
+
+  Output will look like this:
+    [
+        { ein: <ein>, name: <name>, url: <url>, tags:[<tag>, <tag>, ..., <tag>] }, 
+        ...
+    ]
+
+{% endcomment %}
+
+[
+{% for nfp in  nfps %}
+    {% capture url %}{{ site.url }}/{{ site.github.url }}/WA/Seattle/{{ nfp.ein }}{% endcapture %}
+    { "ein": "{{nfp.ein}}", "name": "{{nfp.name}}", "url": "{{ url }}", "tags":[{% assign len = nfp.tags | size %}{% if len > 0 %}"{{nfp.tags | join: '", "'}}"{% endif %}] }{% if forloop.last == false %},{% endif %}
+{% endfor %}
+]
+{% endcapture %}
+{% comment %} -------------------------- Actual output here! --------------------------- {% endcomment %}
+{{ all_the_things | replace: "\n\n", "\n " }}

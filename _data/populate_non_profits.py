@@ -1,5 +1,3 @@
-# Sorry, I don't have time to learn Ruby.
-#
 # Pull the data from the SQLite3 database and make
 # the nonprofit pages.
 import os
@@ -84,6 +82,11 @@ for entry in result:
     )
     if not os.path.exists(dir_path):
         os.makedirs(dir_path)
+        index_path = os.path.join(dir_path, 'index.html')
+        with open(os.path.join(dir_path, 'index.html'), 'w') as outfile:
+            page_content = '---\nlayout: cities\npermalink: /{}/{}/\n---\n'
+            outfile.write(page_content.format(row.state, row.city.replace(' ', '-')))
+        
     path = os.path.join(dir_path, '{}.md'.format(row.ein))
     with open(path, 'w') as outfile:
         outfile.write(content.format(**row._asdict()))

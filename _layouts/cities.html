@@ -1,0 +1,95 @@
+---
+layout: default
+section: overview
+---
+{% comment %}
+Allow the user to select tags, and randomly present a selection (10 or so?)
+of entries from those tags.
+{% endcomment %}
+<h1>Find a bundle!</h1>
+
+<section id="controls"></section>
+<section id="bundle"><h2>Your bundle</h2></section>
+<section id="all-nfps"><h2>All non-profits</h2></section>
+    
+<script>
+window.onload = function() {
+{% assign url_len_minus_one = (page.url | size) | minus: 1 %}
+d3.json(
+  "assets/data{{ page.url | slice: 0, url_len_minus_one }}.json",
+  function(err, nfps) {
+    var bundle_size = 8;
+
+    var all_tags = nfps.map( entry => entry.tags)
+      .reduce(
+        function(existing_tags, new_tags){
+            return new_tags.reduce(
+              function(tagset, tag){ tagset[tag] = (tag in tagset) ? tagset[tag] + 1 : 1; return tagset; },
+              existing_tags);
+        },
+      {});
+    var selected_tags = Object.keys(all_tags).reduce(function(accum, entry){ accum[entry] = all_tags[entry]; return accum; }, {});
+
+
+  /*** Show the random bundle ***/
+  function makeBundle(size) {
+    /* remove the old bundle if it exists */
+    d3.select('#bundle').selectAll('ul').remove();
+    var entries = d3.select('#all-nfps').selectAll('li').filter(function(){ return !this.classList.contains('hidden'); }).reduce(function(accum, entry) { return accum.concat(entry); }, []);
+    var indices = [];
+    size = Math.min(size, entries.length);
+    while (indices.length < size) {
+      indices.push(Math.floor(Math.random() * entries.length));
+      indices = indices.filter(function(val, index, self) { return self.indexOf(val) == index; });
+    }
+    var bundle = document.getElementById('bundle').appendChild(document.createElement('ul'));
+    for (var i=0; i < indices.length; i++) {
+      bundle.appendChild(entries[indices[i]].cloneNode(true));
+    }
+  }
+
+  /*** Set up the controls ***/
+    d3.select('#controls').selectAll('button')
+      .data(Object.keys(all_tags).sort(function(a, b){ return all_tags[b] - all_tags[a];}))
+      .enter().append('button')
+        .attr('type', 'button')
+        .attr('name', function(d){ return d;})
+        .attr('id', function(d){ return d;})
+        .attr('value', function(d, i) { return i < 2 ? 'selected' : 'deselected'; })
+        .text(function(d){ return d;})
+        .on('click',
+            function(d, i){
+              if (this.getAttribute('value') == 'deselected') {
+                /* change to selected */
+                this.setAttribute('value', 'selected');
+                selected_tags[this.id] = all_tags[this.id];
+              } else {
+                /* change to not selected */
+                this.setAttribute('value', 'deselected');
+                delete selected_tags[this.id]; 
+              }
+              d3.select('#all-nfps').selectAll('li').classed('hidden', function(d, i) {
+                for (var i=0; i < d.tags.length; i++) {
+                  if (d.tags[i] in selected_tags) {
+                    return false;
+                  }
+              }
+              return true;
+            });
+            makeBundle(bundle_size);
+          });
+
+
+  /*** Show all NFPs with the given tags ***/
+  d3.select('#all-nfps').append('ul').selectAll('li')
+    .data(nfps)
+    .enter().append('li')
+      .append('a')
+          .attr('href', function(d){ return d.url; })
+          .text(function(d){ return d.name + " (" + d.ein + ")";});
+
+  makeBundle(bundle_size);
+
+});
+};
+</script>

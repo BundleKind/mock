@@ -51,6 +51,19 @@ footer {
   text-align: center;
 }
 
+#controls button[value="deselected"] {
+  box-shadow: none;
+  opacity: 0.5;
+}
+
+#controls button[value="selected"] {
+  box-shadow: 0 0 3px 1px #777;
+}
+
+.hidden {
+  display: none;
+}
+
 .horizontal-flex {
   display: flex;
   justify-content: space-between;
@@ -125,7 +138,7 @@ footer {
   transition: all 0.2s ease-in-out;
 }
 
-.tag {
+.tag, #controls button {
   background: #eef;
   border: 1px solid #888;
   border-radius: 0.3em;
