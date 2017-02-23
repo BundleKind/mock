@@ -1,3 +1,4 @@
+baseurl: /mock
 orgname: 'Bundle-Kind (mock)'
 collections:
   non_profits:
