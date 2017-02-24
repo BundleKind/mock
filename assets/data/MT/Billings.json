@@ -16,7 +16,7 @@
 
 [
 {% for nfp in  nfps %}
-    {% capture url %}{{ site.url }}/{{ site.github.url }}/MT/Billings/{{ nfp.ein }}{% endcapture %}
+    {% capture url %}MT/Billings.html/{{ nfp.ein }}{% endcapture %}
     { "ein": "{{nfp.ein}}", "name": "{{nfp.name}}", "url": "{{ url }}", "tags":[{% assign len = nfp.tags | size %}{% if len > 0 %}"{{nfp.tags | join: '", "'}}"{% endif %}] }{% if forloop.last == false %},{% endif %}
 {% endfor %}
 ]
