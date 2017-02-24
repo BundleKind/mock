@@ -21,7 +21,7 @@ script = """---
 
 [
 {%% for nfp in  nfps %%}
-    {%% capture url %%}%s/{{ nfp.ein }}{%% endcapture %%}
+    {%% capture url %%}%s/{{ nfp.ein }}.html{%% endcapture %%}
     { "ein": "{{nfp.ein}}", "name": "{{nfp.name}}", "url": "{{ url }}", "tags":[{%% assign len = nfp.tags | size %%}{%% if len > 0 %%}"{{nfp.tags | join: '", "'}}"{%% endif %%}] }{%% if forloop.last == false %%},{%% endif %%}
 {%% endfor %%}
 ]
@@ -35,7 +35,7 @@ for state_path in glob.glob(os.path.join('..', '_non_profits', '*')):
     for city_path in glob.glob(os.path.join(state_path, '*')):
         dash_city = os.path.basename(city_path)
         city = ' '.join(dash_city.split('-'))
-        url_midsection = os.path.join(state, dash_city + '.html')
+        url_midsection = os.path.join(state, dash_city)
         destination_path = city_path.replace('_non_profits', os.path.join('assets', 'data')) + '.json'
         destination_dir = os.path.dirname(destination_path)
         if not os.path.exists(destination_dir):

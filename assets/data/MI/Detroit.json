@@ -16,7 +16,7 @@
 
 [
 {% for nfp in  nfps %}
-    {% capture url %}MI/Detroit.html/{{ nfp.ein }}{% endcapture %}
+    {% capture url %}MI/Detroit/{{ nfp.ein }}.html{% endcapture %}
     { "ein": "{{nfp.ein}}", "name": "{{nfp.name}}", "url": "{{ url }}", "tags":[{% assign len = nfp.tags | size %}{% if len > 0 %}"{{nfp.tags | join: '", "'}}"{% endif %}] }{% if forloop.last == false %},{% endif %}
 {% endfor %}
 ]
