@@ -49,38 +49,38 @@ description: 'Default description'
 
 <!-- CSS
 ================================================== -->
-  <link href='/assets/css/site.css' rel='stylesheet' />
+  <link href='assets/css/site.css' rel='stylesheet' />
 {% if page.url == '/' %}
-  <link href='/assets/css/clickmap.css' rel='stylesheet' />
+  <link href='assets/css/clickmap.css' rel='stylesheet' />
 {% endif %}
 <!-- Javascript
 ================================================== -->
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   <script async defer>
-    if (!window.jQuery) document.write('<script src="/assets/js/jquery-3.1.1.min.js"><\/script>');
+    if (!window.jQuery) document.write('<script src="assets/js/jquery-3.1.1.min.js"><\/script>');
     $.getScript("https://unpkg.com/react@15/dist/react.min.js")
       .fail(function( jqxhr, settings, exception ) {
-        document.write('<script src="/assets/js/react.min.js"><\/script>');
+        document.write('<script src="assets/js/react.min.js"><\/script>');
       });
     $.getScript("https://unpkg.com/react-dom@15/dist/react-dom.min.js")
       .fail(function( jqxhr, settings, exception ) {
-        document.write('<script src="/assets/js/react-dom.min.js"><\/script>');
+        document.write('<script src="assets/js/react-dom.min.js"><\/script>');
       });
 {% assign last_char = page.url | slice: -1, 1 %}
 {% if page.url == '/' or last_char == '/' %} {% comment %} Only for the index pages {% endcomment %}
 {% if page.url == '/' %}
     $.getScript("https://d3js.org/topojson.v1.min.js")
       .fail(function( jqxhr, settings, exception ) {
-        document.write('<script src="/assets/js/topojson.v1.min.js"><\/script>');
+        document.write('<script src="assets/js/topojson.v1.min.js"><\/script>');
       });
 {% endif %}
     $.getScript("https://d3js.org/d3.v3.min.js")
       .fail(function( jqxhr, settings, exception ) {
-        document.write('<script src="/assets/js/d3.v3.min.js"><\/script>');
+        document.write('<script src="assets/js/d3.v3.min.js"><\/script>');
       });
 {% endif %}
   </script>
-  <script src="/assets/js/site.js"></script>
+  <script src="assets/js/site.js"></script>
 </head>
 <body>
   {% comment %} skipnav for screen readers {% endcomment %}
