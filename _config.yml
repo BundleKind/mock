@@ -18,7 +18,10 @@ prose:
   ignore:
     - index.html
     - _config.yml
+    - .gitignore
+    - Gemfile
     - /_layouts
+    - /_data
     - /assets
   metadata:
     _non_profits:
