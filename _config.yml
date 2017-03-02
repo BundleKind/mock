@@ -12,3 +12,91 @@ defaults:
       type: non_profits
     values:
       layout: non_profit
+prose:
+  siteurl: 'http://bundle-kind.github.io/mock/'
+  media: 'assets/media'
+  ignore:
+    - index.html
+    - _config.yml
+    - /_layouts
+    - /assets
+  metadata:
+    _non_profits:
+      - name: "layout"
+        field:
+          element: "hidden"
+          value: "non_profit"
+      - name: "ein"
+        field:
+          element: "text"
+          placeholder: "the nonprofit's employer ID number"
+      - name: "homepage"
+        field:
+          element: "text"
+          placeholder: "homepage URL"
+      - name: "address"
+        field:
+          element: "text"
+          placeholder: "full address"
+      - name: "description"
+        field:
+          element: "text"
+          placeholder: "short description"
+      - name: "tags"
+        field:
+          element: "multiselect"
+          label: "Modify Tags"
+          placeholder: "Choose Tags"
+          options:
+            - name: "addiction"
+              value: "addiction"
+            - name: "advocacy"
+              value: "advocacy"
+            - name: "arts"
+              value: "arts"
+            - name: "charitable"
+              value: "charitable"
+            - name: "education"
+              value: "education"
+            - name: "elderly"
+              value: "elderly"
+            - name: "employment"
+              value: "employment"
+            - name: "family"
+              value: "family"
+            - name: "funding"
+              value: "funding"
+            - name: "greek"
+              value: "greek"
+            - name: "health"
+              value: "health"
+            - name: "media"
+              value: "media"
+            - name: "military"
+              value: "military"
+            - name: "poverty"
+              value: "poverty"
+            - name: "professional"
+              value: "professional"
+            - name: "rehabilitation"
+              value: "rehabilitation"
+            - name: "religious"
+              value: "religious"
+            - name: "social"
+              value: "social"
+            - name: "sports"
+              value: "sports"
+            - name: "technology"
+              value: "technology"
+            - name: "farm"
+              value: "farm"
+            - name: "gender"
+              value: "gender"
+            - name: "nature"
+              value: "nature"
+            - name: "politics"
+              value: "politics"
+            - name: "women"
+              value: "women"
+            - name: "youth"
+              value: "youth"
