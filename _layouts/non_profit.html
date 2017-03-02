@@ -22,7 +22,9 @@ section: non_profit
     {% capture tag_list %}{{ page.tags | array_to_sentence_string }}{% endcapture %}
     {% if tag_list != '' %}
     Tags: {{ tag_list }}
+    <br/>
     {% endif %}
+    <a href="http://prose.io/#BundleKind/mock/edit/master/_non_profits/{{ page.state }}/{{ page.city }}/{{ page.ein }}.md">Edit this page's content</a>
   </div>
 </section>
 
