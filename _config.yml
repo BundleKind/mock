@@ -30,22 +30,31 @@ prose:
         field:
           element: "hidden"
           value: "non_profit"
+      - name: "name"
+        field:
+          element: "text"
+          value: "Name"
+          placeholder: "nonprofit name"
       - name: "ein"
         field:
           element: "text"
+          value: "EIN number"
           placeholder: "the nonprofit's employer ID number"
       - name: "homepage"
         field:
           element: "text"
+          value: "URL"
           placeholder: "homepage URL"
-      - name: "address"
-        field:
-          element: "text"
-          placeholder: "full address"
       - name: "description"
         field:
           element: "text"
+          value: "description"
           placeholder: "short description"
+      - name: "address"
+        field:
+          element: "text"
+          value: "address"
+          placeholder: "full address"
       - name: "tags"
         field:
           element: "multiselect"
