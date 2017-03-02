@@ -24,7 +24,7 @@ prose:
     - /_data
     - /assets
   metadata:
-    _non_profits/*/*:
+    _non_profits/IL/Chicago:
       - name: "layout"
         field:
           element: "hidden"
