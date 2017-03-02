@@ -1,5 +1,5 @@
 baseurl: /mock
-orgname: 'Bundle-Kind (mock)'
+orgname: 'BundleKind (mock)'
 collections:
   non_profits:
     state: ''
@@ -13,7 +13,7 @@ defaults:
     values:
       layout: non_profit
 prose:
-  siteurl: 'http://bundle-kind.github.io/mock/'
+  siteurl: 'http://bundlekind.github.io/mock/'
   media: 'assets/media'
   ignore:
     - index.html
